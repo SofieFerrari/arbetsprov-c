@@ -21,11 +21,11 @@ CORS
 
 ## Running the Application:
 
-# To start the application in dev mode, run:
+### To start the application in dev mode, run:
 
 npm run dev
 
-# To start the application in production mode run:
+### To start the application in production mode run:
 
 npm start
 
@@ -40,4 +40,4 @@ Check status (who won? return winner)
 
 ## Note that this game can only be played once. For a rematch, please create a new game-ID.
 
-## View it live:
+# View it live:
