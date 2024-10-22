@@ -12,6 +12,7 @@ Node.js
 Express
 CORS
 @babel
+UUID
 
 ## Installation & Setup DOWNLOAD:
 
