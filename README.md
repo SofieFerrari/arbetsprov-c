@@ -33,10 +33,36 @@ npm start
 
 This API exposed the following endpoints:
 
-Create a new game - post (retun id)
-Join a game - put? post?
-Make a move - post (name and move)
-Check status (who won? return winner)
+### 1. Create a Game
+Path: /api/games
+Method: POST
+Description: This endpoint allows Player 1 to create a new game. The request should include the player’s name in the request body.
+
+### 2. Join a Game
+Path: /api/games/:id/join
+Method: POST
+Description: This endpoint allows Player 2 to join an existing game. The game ID should be specified in the URL path, and the player’s name should be included in the request body.
+
+### 3. Make a Move
+Path: /api/games/:id/move
+Method: POST
+Description: This endpoint allows players to make their moves in the game. The game ID should be specified in the URL path, and the request body should include the player's name and the move they wish to make.
+
+{
+    "name": "Player1",
+    "move": "Rock"
+}
+
+### 4. Get Game State
+Path: /api/games/:id
+Method: GET
+Description: This endpoint retrieves the current state of the game, including the moves made by both players and the winner (if the game is over). The game ID should be specified in the URL path.
+
+### 5. Documentation of All Endpoints
+Path: /
+Method: GET
+Description: This endpoint returns a list of all available API endpoints for easy reference.
+
 
 ## Note that this game can only be played once. For a rematch, please create a new game-ID.
 
