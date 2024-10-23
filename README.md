@@ -37,15 +37,20 @@ This API exposed the following endpoints:
 ### 1. Create a Game
 Path: /api/games
 Method: POST
-Description: This endpoint allows Player 1 to create a new game. The request should include the player’s name in the request body.
+Description: This endpoint creates a game ID. 
 
 ### 2. Join a Game
 Path: /api/games/:id/join
 Method: POST
-Description: This endpoint allows Player 2 to join an existing game. The game ID should be specified in the URL path, and the player’s name should be included in the request body.
+Description: This endpoint allows Players 1 and 2 to join an the game. The game ID should be specified in the URL path, and each players name should be included in the request body.
+
+Ex: Player 1 enters:
+{
+    "name": "Player1"
+}
 
 ### 3. Make a Move
-Path: /api/games/:id/move
+Path: /api/games/:id/play
 Method: POST
 Description: This endpoint allows players to make their moves in the game. The game ID should be specified in the URL path, and the request body should include the player's name and the move they wish to make.
 
