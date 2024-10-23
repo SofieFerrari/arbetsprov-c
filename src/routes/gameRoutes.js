@@ -8,16 +8,16 @@ import {
 
 const router = express.Router()
 
-// Route för att skapa ett spel
+// Route to create game
 router.post("/", createGameController)
 
-// Route för att gå med i ett spel
+// Route to join game
 router.post("/:id/join", joinGameController)
 
-// Route för att göra sitt drag
+// Route to play the game by making a move
 router.post("/:id/play", playGameController)
 
-// Route för att se vem som vann
+// Route to controll who won the game
 router.get("/:id", getGameStateController)
 
 export default router

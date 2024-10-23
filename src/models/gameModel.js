@@ -16,14 +16,13 @@ export const createGame = () => {
 }
 
 export const joinGame = (id, playerName) => {
-	console.log(`Trying to join game for game ID: ${id} `)
 	if (!games[id]) {
 		throw new Error("Game not found")
 	}
-	if ((!playerName)) {
+	if (!playerName) {
 		throw new Error("Player name is required")
 	}
-  if (!games[id].playerOne.name) {
+	if (!games[id].playerOne.name) {
 		games[id].playerOne.name = playerName
 	} else if (!games[id].playerTwo.name) {
 		games[id].playerTwo.name = playerName
@@ -33,7 +32,6 @@ export const joinGame = (id, playerName) => {
 }
 
 export const playGame = (id, playerName, move) => {
-	console.log(`Player Name: ${playerName}, Game ID: ${id}, Move: ${move}`)
 	const game = games[id]
 	if (!game) {
 		console.log(`Game with ID ${id} not found`)
