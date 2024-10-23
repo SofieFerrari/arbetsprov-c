@@ -8,11 +8,11 @@ Create a new ID to play a new game.
 
 ## Technology Stack:
 
-Node.js
-Express
-CORS
-@babel
-UUID
+Node.js - I chose Node.js because it is the language I am most familiar with. I like how it can handle multiple requests without blocking which creates a smooth, real time game.
+Express - Because this is the framework I have used before when creating APIs. It enables routing and middleware which keeps the code clean and easier to navigate.
+CORS - I added this middleware and made it possible for requests from all browsers. It's possible to make security restrictions (choose special browsers) in the future if needed.
+@babel - To be able to use newer JavaScript features bc I use ES6.
+UUID - To generate unique identifiers securely.
 
 ## Installation & Setup DOWNLOAD:
 
@@ -46,13 +46,18 @@ Path: /api/games
 Method: POST
 Description: This endpoint returns a game ID
 
+Ex Response:
+{
+"id": "random-id"
+}
+
 ### 2. Join a Game
 
 Path: /api/games/:id/join
 Method: POST
 Description: This endpoint allows Players 1 and 2 to join an the game. The game ID should be specified in the URL path, and each players name should be included in the request body.
 
-Ex: Player 1 enters:
+Ex Request:
 {
 "name": "Player1"
 }
@@ -63,6 +68,7 @@ Path: /api/games/:id/play
 Method: POST
 Description: This endpoint allows players to make their moves in the game. The game ID should be specified in the URL path, and the request body should include the player's name and the move they wish to make.
 
+Ex Request:
 {
 "name": "Player1",
 "move": "Rock"
@@ -95,6 +101,8 @@ Path: /
 Method: GET
 Description: This endpoint returns a list of all available API endpoints for easy reference.
 
-## Note that this game can only be played once. For a rematch, please create a new game-ID.
+## Important Note:
 
-# View it live:
+This game can only be played once. For a rematch, please create a new game-ID.
+
+## Future Improvements:
