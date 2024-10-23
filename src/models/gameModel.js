@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from "uuid"
 
 const games = {}
+const validMoves = ["Rock", "Paper", "Scissor"]
 
-export const createGame = (playerOneName) => {
+export const createGame = () => {
 	const id = uuidv4()
 	games[id] = {
 		id,
-		playerOne: { name: playerOneName, move: null },
+		playerOne: { name: null, move: null },
 		playerTwo: { name: null, move: null },
 		winner: null,
 		gameOver: false,
@@ -14,19 +15,34 @@ export const createGame = (playerOneName) => {
 	return id
 }
 
-export const joinGame = (id, playerTwoName) => {
+export const joinGame = (id, playerName) => {
 	console.log(`Trying to join game for game ID: ${id} `)
 	if (!games[id]) {
 		throw new Error("Game not found")
 	}
-	if (!playerTwoName) {
+	if ((!playerName)) {
 		throw new Error("Player name is required")
 	}
-	games[id].playerTwo.name = playerTwoName
+  if (!games[id].playerOne.name) {
+		games[id].playerOne.name = playerName
+	} else if (!games[id].playerTwo.name) {
+		games[id].playerTwo.name = playerName
+	} else {
+		throw new Error("Game is already full")
+	}
 }
 
-export const makeMove = (playerName, id, move) => {
+export const playGame = (id, playerName, move) => {
+	console.log(`Player Name: ${playerName}, Game ID: ${id}, Move: ${move}`)
 	const game = games[id]
+	if (!game) {
+		console.log(`Game with ID ${id} not found`)
+		throw new Error("Game not found")
+	}
+	if (game.gameOver) {
+		throw new Error("Game is already over")
+	}
+
 	if (game && !game.gameOver) {
 		if (game.playerOne.name === playerName) {
 			game.playerOne.move = move
@@ -34,10 +50,9 @@ export const makeMove = (playerName, id, move) => {
 			game.playerTwo.move = move
 		}
 
-		// const validMoves = ["Rock", "Paper", "Scissor"]
-		// if (!validMoves.includes(move)) {
-		// 	throw new Error("Invalid move. Please choose Rock, Paper, or Scissor.")
-		// }
+		if (!validMoves.includes(move)) {
+			throw new Error("Invalid move. Please choose Rock, Paper, or Scissor.")
+		}
 
 		if (game.playerOne.move && game.playerTwo.move) {
 			if (game.playerOne.move === game.playerTwo.move) {
