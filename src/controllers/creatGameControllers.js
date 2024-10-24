@@ -43,6 +43,7 @@ export const joinGameController = (req, res, next) => {
 export const playGameController = (req, res, next) => {
 	try {
 		const { id } = req.params
+    console.log(`Received game ID: ${id}`)
 		const name = convertInput(req.body.name)
 		const move = convertInput(req.body.move)
 
@@ -55,6 +56,7 @@ export const playGameController = (req, res, next) => {
 		playGame(id, name, move)
 		res.status(200).send(`${name} successfully played ${move}`)
 	} catch (error) {
+    console.error(error)
 		error.status = 400
 		error.message = "Could not perform the move"
 		next(error)

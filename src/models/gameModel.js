@@ -12,6 +12,7 @@ export const createGame = () => {
 		winner: null,
 		gameOver: false,
 	}
+	console.log(`game created with id: ${id}`)
 	return id
 }
 
@@ -67,9 +68,9 @@ export const playGame = (id, playerName, move) => {
 			game.winner = game.playerTwo.name
 		}
 		game.gameOver = true
-	} else {
-		throw new Error("Game not found")
 	}
+
+	return game
 }
 
 export const getGameState = (id) => {
