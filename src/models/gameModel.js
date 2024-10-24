@@ -40,6 +40,12 @@ export const playGame = (id, playerName, move) => {
 		throw new Error("Game is already over")
 	}
 
+	//controll if move is valid
+	if (!validMoves.includes(move)) {
+		throw new Error("Invalid move. Please choose rock, paper, or scissors.")
+	}
+
+	//controll if player has entered a name and move can be made.
 	if (game.playerOne.name === playerName) {
 		game.playerOne.move = move
 	} else if (game.playerTwo.name === playerName) {
@@ -48,34 +54,19 @@ export const playGame = (id, playerName, move) => {
 		throw new Error("Player not found in this game")
 	}
 
-	if (!validMoves.includes(move)) {
-		console.log(`Invalid move: ${move}`)
-		throw new Error("Invalid move. Please choose Rock, Paper, or Scissor.")
-	}
-
-	if (game && !game.gameOver) {
-		if (game.playerOne.name === playerName) {
-			game.playerOne.move = move
-		} else if (game.playerTwo.name === playerName) {
-			game.playerTwo.move = move
+	if (game.playerOne.move && game.playerTwo.move) {
+		if (game.playerOne.move === game.playerTwo.move) {
+			game.winner = "Tie"
+		} else if (
+			(game.playerOne.move === "rock" && game.playerTwo.move === "scissors") ||
+			(game.playerOne.move === "scissors" && game.playerTwo.move === "paper") ||
+			(game.playerOne.move === "paper" && game.playerTwo.move === "rock")
+		) {
+			game.winner = game.playerOne.name
+		} else {
+			game.winner = game.playerTwo.name
 		}
-
-		if (game.playerOne.move && game.playerTwo.move) {
-			if (game.playerOne.move === game.playerTwo.move) {
-				game.winner = "Tie"
-			} else if (
-				(game.playerOne.move === "Rock" &&
-					game.playerTwo.move === "Scissorss") ||
-				(game.playerOne.move === "Scissorss" &&
-					game.playerTwo.move === "Paper") ||
-				(game.playerOne.move === "Paper" && game.playerTwo.move === "Rock")
-			) {
-				game.winner = game.playerOne.name
-			} else {
-				game.winner = game.playerTwo.name
-			}
-			game.gameOver = true
-		}
+		game.gameOver = true
 	} else {
 		throw new Error("Game not found")
 	}

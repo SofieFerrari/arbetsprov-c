@@ -2,23 +2,22 @@
 
 ## The Project:
 
-In this project I created a RESTful API for the game of Rock, Paper, Scissors.
-A player requests a game-ID and then Player 1 and Player 2 can be added to the game by using this ID. The game can only be played once, a win is counted as a win, and so is also a tie.
-Create a new ID to play a new game.
+In this project, I created a RESTful API for the game of Rock, Paper, Scissors. A player requests a game ID, and then Player 1 and Player 2 can be added to the game by using this ID. The game can only be played once; a win is counted as a win, and so is also a tie. Create a new ID to play a new game.
 
 ## Technology Stack:
 
-Node.js - I chose Node.js because it is the language I am most familiar with. I like how it can handle multiple requests without blocking which creates a smooth, real time game.
-Express - Because this is the framework I have used before when creating APIs. It enables routing and middleware which keeps the code clean and easier to navigate.
-CORS - I added this middleware and made it possible for requests from all browsers. It's possible to make security restrictions (choose special browsers) in the future if needed.
-@babel - To be able to use newer JavaScript features bc I use ES6.
-UUID - To generate unique identifiers securely.
+Node.js - I chose Node.js because it is the language I am most familiar with. I like how it can handle multiple requests without blocking, which creates a smooth, real-time game.
+Express - This is the framework I have used before when creating APIs. It enables routing and middleware, which keeps the code clean and easier to navigate.
+CORS - I added this middleware to allow requests from all browsers. It's possible to implement security restrictions (such as choosing specific browsers) in the future if needed.
+@babel - This is used to take advantage of newer JavaScript features because I use ES6.
+UUID - This is used to generate unique identifiers securely.
 
-## Installation & Setup DOWNLOAD:
+## Installation & Setup
 
-1. Download the zip file and extract it to your desired location.
+DOWNLOAD:
+Download the zip file and extract it to your desired location.
 
-2. Through the terminal, navigate to the project directory:
+In the terminal, navigate to the project directory:
 
 cd path/to/your/arbetsprov
 
@@ -43,6 +42,16 @@ This API exposed the following endpoints:
 ## Important note for testing the game (with Postman):
 
 Click Body --> opt in "raw" and choose JSON in the drop down menu
+
+## Game Flow Example
+
+1. Player 1 sends a request to create a new game and receives a game ID.
+2. Player 1 shares the game ID with Player 2 via any communication channel.
+3. Player 1 joins the game by using the ID and choosing a name.
+4. Player 2 joins the game by using the ID and choosing a name.
+5. Player 1 makes a move (e.g., Rock).
+6. Player 2 makes a move (e.g., Scissors).
+7. Both players can check the state of the game to see who won.
 
 ### 1. Create a Game
 
@@ -76,12 +85,11 @@ Ex Request 2:
 "name": "Player2"
 }
 
-### 3. Make a Move
+### 3. Play the Game
 
 Path: /api/games/:id/play
 Method: POST
 Description: This endpoint allows players to make their moves in the game. The game ID should be specified in the URL path, and the request body should include the player's name and the move they wish to make.
-NOTE that every move has to be typed with a capital letter: Rock, Paper, Scissors.
 Note that the input isn't case sensitive.
 
 Ex Request:
@@ -119,10 +127,14 @@ Description: This endpoint returns a list of all available API endpoints for eas
 
 ## Important Note:
 
-This game can only be played once. For a rematch, please create a new game-ID by starting over from step 1.
+This game can only be played once. For a rematch, please create a new game-ID by starting over from step 1. The data is stored in a empty object and is removed after the game ends or if the server restarts.
 
 ## Future Improvements:
 
-Add a fancy frontend and make the game possible to play online without sending the id by SoMe:
+1. Create an array with all the moves to map over.
+
+2. Validate user name input by setting requirements like min length and max length characters.
+
+3. Add a fancy frontend and make the game possible to play online without sending the id by SoMe:
 
 Initially I made Player1 add their name in the first step where the first player creates the game. But I changed this later in the process because I realized that if the game grows and is featured on a site for online games, the id-request will be made when you enter the game and two random people can join the game. Therefor it is crucial that the joinGame function makes it possible for both players to be added to the game in this step.

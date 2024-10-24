@@ -28,8 +28,13 @@ export const joinGameController = (req, res, next) => {
 		joinGame(req.params.id, playerName)
 		res.status(200).send(`${playerName} successfully joined the game! Yeay!`)
 	} catch (error) {
-		error.status = 404
-		error.message = "Game not found"
+		if (error.message === "Game not found") {
+			error.status = 404
+		} else if (error.message === "Game is already full") {
+			error.status = 400
+		} else {
+			error.status = 500
+		}
 		next(error)
 	}
 }
