@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid"
 
 const games = {}
-const validMoves = ["Rock", "Paper", "Scissor"]
+const validMoves = ["rock", "paper", "scissors"]
 
 export const createGame = () => {
 	const id = uuidv4()
@@ -34,11 +34,23 @@ export const joinGame = (id, playerName) => {
 export const playGame = (id, playerName, move) => {
 	const game = games[id]
 	if (!game) {
-		console.log(`Game with ID ${id} not found`)
 		throw new Error("Game not found")
 	}
 	if (game.gameOver) {
 		throw new Error("Game is already over")
+	}
+
+	if (game.playerOne.name === playerName) {
+		game.playerOne.move = move
+	} else if (game.playerTwo.name === playerName) {
+		game.playerTwo.move = move
+	} else {
+		throw new Error("Player not found in this game")
+	}
+
+	if (!validMoves.includes(move)) {
+		console.log(`Invalid move: ${move}`)
+		throw new Error("Invalid move. Please choose Rock, Paper, or Scissor.")
 	}
 
 	if (game && !game.gameOver) {
@@ -48,16 +60,13 @@ export const playGame = (id, playerName, move) => {
 			game.playerTwo.move = move
 		}
 
-		if (!validMoves.includes(move)) {
-			throw new Error("Invalid move. Please choose Rock, Paper, or Scissor.")
-		}
-
 		if (game.playerOne.move && game.playerTwo.move) {
 			if (game.playerOne.move === game.playerTwo.move) {
 				game.winner = "Tie"
 			} else if (
-				(game.playerOne.move === "Rock" && game.playerTwo.move === "Scissor") ||
-				(game.playerOne.move === "Scissor" &&
+				(game.playerOne.move === "Rock" &&
+					game.playerTwo.move === "Scissorss") ||
+				(game.playerOne.move === "Scissorss" &&
 					game.playerTwo.move === "Paper") ||
 				(game.playerOne.move === "Paper" && game.playerTwo.move === "Rock")
 			) {

@@ -1,3 +1,4 @@
 export const handleError = (err, req, res, next) => {
-	res.status(500).json({ message: "Internal server error" })
+	const status = err.status || 500
+	res.status(status).json({ message: err.message || "Internal server error" })
 }

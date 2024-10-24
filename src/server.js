@@ -10,7 +10,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use("/api/games", gameRoutes)
-app.use("/", displayEndpoints)
+app.use("/", displayEndpoints(app))
 
 app.use(handleError)
 
